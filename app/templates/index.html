@@ -1,12 +1,12 @@
 {% extends 'base.html' %} {% block content %}
-<div style="height: 100vh">
-    <div class="flex-center flex-column">
-
-        <h1 class="text-hide animated fadeIn mb-4" style="background-image: url('https://mdbootstrap.com/img/logo/mdb-transparent-250px.png'); width: 250px; height: 90px;">
-            MDBootstrap</h1>
-        <h5 class="animated fadeIn mb-3">Thank you for using our product. We're glad you're with us.</h5>
-
-        <p class="animated fadeIn text-muted">MDB Team</p>
+<div class="view full-page-intro" style="background-image: url({{ url_for('static',filename='img/wallpaper.jpg') }});background-repeat:no-repeat;background-size:cover;height:100vh;">
+    <div class="text-white text-center py-5 px-4 my-5">
+        <div>
+            <h2 class="card-title h1-responsive pt-3 mb-5 font-bold"><strong>Stop Working, Start Amazing.</strong></h2>
+            <p class="mx-5 mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat fugiat, laboriosam, voluptatem, optio vero odio nam sit officia accusamus minus error nisi architecto nulla ipsum dignissimos. Odit sed qui, dolorum!
+            </p>
+            <a class="btn btn-outline-white btn-md"><i class="fa fa-camera-retro left"></i> View Bing Wallpapers</a>
+        </div>
     </div>
 </div>
 {% endblock %}

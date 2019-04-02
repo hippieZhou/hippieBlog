@@ -1,5 +1,5 @@
 <header>
-    <div class="collapse bg-dark" id="navbarHeader">
+    <div class="collapse unique-color-dark" id="navbarHeader">
         <div class="container">
             <div class="row">
                 <div class="col-sm-8 col-md-7 py-4">
@@ -13,6 +13,7 @@
                         <li> <a class="tw-ic mr-2" role="button" target="_blank" href="https://www.github.com/hippiezhou"><i class="fab fa-github text-white"></i></a></li>
                         <li> <a class="tw-ic mr-2" role="button" target="_blank" href="https://www.cnblogs.com/hippieZhou/"><i class="fas fa-rss text-white"></i></a></li>
                         <li> <a class="tw-ic mr-2" role="button" href="mailto:hippiezhou@outlook.com"><i class="far fa-envelope text-white"></i></a></li>
+                        <li> <a class="tw-ic mr-2" role="button" data-toggle="modal" data-target="#basicExampleModal"><i class="fas fa-heartbeat text-danger"></i></a></li>
                     </ul>
                 </div>
             </div>
@@ -30,3 +31,20 @@
         </div>
     </div>
 </header>
+
+<!-- Modal -->
+<div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center m-4">
+                <img src="{{ url_for('static',filename='img/rewardcode.jpg') }}" alt="thumbnail" class="text-center" style="width: 200px">
+                <p class="m-4">Thank you for your donation. </p>
+            </div>
+        </div>
+    </div>
+</div>
