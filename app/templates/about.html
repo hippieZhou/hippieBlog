@@ -1,0 +1,159 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="container">
+    <!-- Section: Blog v.1 -->
+    <section class="my-5">
+
+        <!-- Section heading -->
+        <h2 class="h1-responsive font-weight-bold text-center my-5">About Me</h2>
+        <!-- Section description -->
+        <p class="text-center w-responsive mx-auto mb-5">I am a .Net Developer who has done UWP, WPF, and Python. Currently engaged in WPF-related development work, but also on the .NetCore and Python has been constantly watching and learning.That's all. Tks.:)</p>
+
+        <!-- Grid row -->
+        <div class="row">
+
+            <!-- Grid column -->
+            <div class="col-lg-5">
+
+                <!-- Featured image -->
+                <div class="view overlay rounded z-depth-2 mb-lg-0 mb-4">
+                    <img class="img-fluid" src="{{ url_for('static',filename='img/01.jpg') }}" alt="Sample image">
+                    <a>
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-lg-7">
+
+                <!-- Category -->
+                <a href="#!" class="green-text">
+                    <h6 class="font-weight-bold mb-3"><i class="fa fa-code pr-2"></i>Dev</h6>
+                </a>
+                <!-- Post title -->
+                <h3 class="font-weight-bold mb-3"><strong>Code My Life</strong></h3>
+                <!-- Excerpt -->
+
+                <span class="badge badge-pill badge-primary m-2">C#</span>
+                <span class="badge badge-pill badge-secondary m-2">Python</span>
+                <span class="badge badge-pill badge-info m-2">Web</span>
+                <span class="badge badge-pill badge-success m-2">MiniProgram</span>
+                <br>
+
+                <section class="section-preview m-2">
+                    WPF、UWP、.NetCore
+                    <div class="progress md-progress mb-2" style="height:8px;">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 70%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    Flask、Django
+                    <div class="progress md-progress mb-2" style="height:8px;">
+                        <div class="progress-bar bg-info" role="progressbar" style="width: 45%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    MiniProgram、Bootstrap
+                    <div class="progress md-progress mb-2" style="height:8px;">
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: 40%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </section>
+
+                <!-- Post data -->
+                <p class="mt-4">Tools: <a><strong>VisualStudio</strong></a>、<a><strong>Visual Sudio Code</strong></a>、<a><strong>Git</strong></a>、<a><strong>SVN</strong></a>、<a><strong>Azure DevOps</strong></a></p>
+            </div>
+            <!-- Grid column -->
+
+        </div>
+        <!-- Grid row -->
+
+        <hr class="my-5">
+
+        <!-- Grid row -->
+        <div class="row">
+
+            <!-- Grid column -->
+            <div class="col-lg-7">
+
+                <!-- Category -->
+                <a href="#!" class="pink-text">
+                    <h6 class="font-weight-bold mb-3"><i class="fas fa-image pr-2"></i>Lifestyle</h6>
+                </a>
+                <!-- Post title -->
+                <h3 class="font-weight-bold mb-3"><strong>Enjoy My Life</strong></h3>
+                <!-- Excerpt -->
+                <p>In my free time, I often go out to see the scenery and try to take pictures. Listening to music allows me to concentrate on what I like, especially at night.</p>
+                <p>Thousands of worlds, always keep this curious and awesome new life to treat.</p>
+                <p><a><strong>Life is short, please enjoy it.</strong></a></p>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-lg-5">
+
+                <!-- Featured image -->
+                <div class="view overlay rounded z-depth-2">
+                    <img class="img-fluid" src="{{ url_for('static',filename='img/02.jpg') }}" alt="Sample image">
+                    <a>
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+
+            </div>
+            <!-- Grid column -->
+
+        </div>
+        <!-- Grid row -->
+
+        <hr class="my-5">
+
+        <!-- Grid row -->
+        <div class="row">
+
+            <!-- Grid column -->
+            <div class="col-lg-5">
+
+                <!-- Featured image -->
+                <div class="view overlay rounded z-depth-2 mb-lg-0 mb-4">
+                    <img class="img-fluid" src="{{ url_for('static',filename='img/03.jpg') }}" alt="Sample image">
+                    <a>
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-lg-7">
+
+                <!-- Category -->
+                <a href="#!" class="indigo-text">
+                    <h6 class="font-weight-bold mb-3"><i class="fas fa-suitcase pr-2"></i>Travels</h6>
+                </a>
+                <!-- Post title -->
+                <h3 class="font-weight-bold mb-3"><strong>Enrich My Life</strong></h3>
+                <!-- Excerpt -->
+                <section class="section-preview m-2">
+                    <div class="mb-3">
+                        <a class="red-text"><i class="fa fa-map-marker pr-2" aria-hidden="true"></i>Beijing</a>
+                    </div>
+                    <div class="mb-3">
+                        <a class="blue-text"><i class="fa fa-map-marker pr-2" aria-hidden="true"></i>Shanghai</a>
+                    </div>
+                    <div class="mb-3">
+                        <a class="green-text"><i class="fa fa-map-marker pr-2" aria-hidden="true"></i>Hangzhou</a>
+                    </div>
+                    <div class="mb-3">
+                        <a class="yellow-text"><i class="fa fa-map-marker pr-2" aria-hidden="true"></i>Wuhan</a>
+                    </div>
+                </section>
+            </div>
+            <!-- Grid column -->
+
+        </div>
+        <!-- Grid row -->
+
+    </section>
+    <!-- Section: Blog v.1 -->
+</div>
+{% endblock %}
