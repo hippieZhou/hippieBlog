@@ -1,2 +1,2 @@
 class Config(object):
-    pass
+    EXPLAIN_TEMPLATE_LOADING = True
