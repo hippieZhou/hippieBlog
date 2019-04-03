@@ -1,15 +1,109 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
+{% block content %}
 
-<body>
-    <h1>C</h1>
-</body>
+<div class="container">
+    <div class="row pt-4">
+        <div class="col-md-7 mb-4">
+            <div class="view overlay z-depth-1-half">
+                <img id="img" src="{{ url_for('static',filename='img/profile.jpg') }}" class="card-img-top" alt="">
+                <div class="mask rgba-white-light"></div>
+            </div>
+        </div>
 
-</html>
+        <div class="col-md-5 mb-4">
+            <h2>2019-01-01</h2>
+            <hr>
+            <p>
+                @hippiezhou
+            </p>
+            <a class="btn btn-indigo btn-md">
+                Download
+                <i class="fa fa-download ml-1"></i>
+            </a>
+            <a class="btn btn-indigo btn-md" href="{{ url_for('bing.detail') }}">
+                Live Show
+                <i class="fa fa-image ml-1"></i>
+            </a>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-lg-4 col-md-12 mb-4">
+            <div class="card">
+                <div class="view overlay zoom">
+                    <img src="{{ url_for('static',filename='img/profile.jpg') }}" class="card-img-top" alt="">
+                    <a>
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a class="btn btn-indigo btn-md">
+                            Live Show
+                            <i class="fa fa-image ml-1"></i>
+                        </a>
+                        <small class="text-muted">yyyy-MM-dd</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-12 mb-4">
+            <div class="card">
+                <div class="view overlay zoom">
+                    <img src="{{ url_for('static',filename='img/profile.jpg') }}" class="card-img-top" alt="">
+                    <a>
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a class="btn btn-indigo btn-md">
+                            Live Show
+                            <i class="fa fa-image ml-1"></i>
+                        </a>
+                        <small class="text-muted">yyyy-MM-dd</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-12 mb-4">
+            <div class="card">
+                <div class="view overlay zoom">
+                    <img src="{{ url_for('static',filename='img/profile.jpg') }}" class="card-img-top" alt="">
+                    <a>
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a class="btn btn-indigo btn-md" href="{{ url_for('bing.detail') }}">
+                            Live Show
+                            <i class="fa fa-image ml-1"></i>
+                        </a>
+                        <small class="text-muted">yyyy-MM-dd</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="mb-5">
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+            </li>
+        </ul>
+    </nav>
+
+</div>
+
+{% endblock %}

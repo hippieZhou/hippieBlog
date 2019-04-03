@@ -3,4 +3,8 @@ from . import bp
 
 @bp.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('bing/index.html')
+
+@bp.route('/detail')
+def detail():
+    return render_template('bing/detail.html')

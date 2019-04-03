@@ -1,10 +1,10 @@
 <!-- Footer -->
-<footer class="page-footer font-small unique-color-dark pt-4 wow fadeIn">
+<footer class="page-footer font-small bg-dark pt-4 wow fadeIn">
 
     <!-- Footer Elements -->
     <div class="container text-center">
-        <p id="time-counter"></p>
         <a href="#!" class="btn btn-outline-white btn-rounded js-cd-top mb-2">Back to top</a>
+        <p id="time-counter"></p>
     </div>
     <!-- Footer Elements -->
 
@@ -24,10 +24,10 @@
     var endTime = new Date("2020/1/1 00:00:00");
 
     // Update the count down every 1 second
-    var x = setInterval(function() {
+    var x = setInterval(function () {
 
         var startTime = new Date()
-            // Set the date we're counting down to
+        // Set the date we're counting down to
         var distance = (endTime.getTime() - startTime.getTime()) / 1000
 
         var days = parseInt(distance / (24 * 60 * 60));
