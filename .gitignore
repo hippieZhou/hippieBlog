@@ -10,3 +10,5 @@ ENV/
 
 # cache
 __pycache__/
+
+*.db
