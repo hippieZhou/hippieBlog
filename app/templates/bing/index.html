@@ -1,27 +1,25 @@
-{% extends 'base.html' %}
-
-{% block content %}
+{% extends 'base.html' %} {% block content %} {% if first and others %}
 
 <div class="container">
     <div class="row pt-4">
         <div class="col-md-7 mb-4">
             <div class="view overlay z-depth-1-half">
-                <img id="img" src="{{ url_for('static',filename='img/profile.jpg') }}" class="card-img-top" alt="">
+                <img id="img" src="{{ first.url }}" class="card-img-top" alt="">
                 <div class="mask rgba-white-light"></div>
             </div>
         </div>
 
         <div class="col-md-5 mb-4">
-            <h2>2019-01-01</h2>
+            <h2>{{ first.datetime.strftime('%Y-%m-%d') }}</h2>
             <hr>
             <p>
-                @hippiezhou
+                @{{ first.copyright }}
             </p>
             <a class="btn btn-indigo btn-md">
                 Download
                 <i class="fa fa-download ml-1"></i>
             </a>
-            <a class="btn btn-indigo btn-md" href="{{ url_for('bing.detail') }}">
+            <a class="btn btn-indigo btn-md" href="{{ url_for('bing.detail',hsh=first.hsh) }}">
                 Live Show
                 <i class="fa fa-image ml-1"></i>
             </a>
@@ -29,81 +27,59 @@
     </div>
     <div class="row">
 
+        {% for item in others.items %}
         <div class="col-lg-4 col-md-12 mb-4">
             <div class="card">
                 <div class="view overlay zoom">
-                    <img src="{{ url_for('static',filename='img/profile.jpg') }}" class="card-img-top" alt="">
+                    <img src="{{ item.url }}" class="card-img-top" alt="">
                     <a>
                         <div class="mask rgba-white-slight"></div>
                     </a>
                 </div>
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
-                        <a class="btn btn-indigo btn-md">
-                            Live Show
-                            <i class="fa fa-image ml-1"></i>
-                        </a>
-                        <small class="text-muted">yyyy-MM-dd</small>
+                        <a class="btn btn-indigo btn-md" href="{{ url_for('bing.detail',hsh=item.hsh) }}">
+                                Live Show
+                                <i class="fa fa-image ml-1"></i>
+                            </a>
+                        <small class="text-muted">{{ item.datetime.strftime('%Y-%m-%d') }}</small>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-4 col-md-12 mb-4">
-            <div class="card">
-                <div class="view overlay zoom">
-                    <img src="{{ url_for('static',filename='img/profile.jpg') }}" class="card-img-top" alt="">
-                    <a>
-                        <div class="mask rgba-white-slight"></div>
-                    </a>
-                </div>
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <a class="btn btn-indigo btn-md">
-                            Live Show
-                            <i class="fa fa-image ml-1"></i>
-                        </a>
-                        <small class="text-muted">yyyy-MM-dd</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-12 mb-4">
-            <div class="card">
-                <div class="view overlay zoom">
-                    <img src="{{ url_for('static',filename='img/profile.jpg') }}" class="card-img-top" alt="">
-                    <a>
-                        <div class="mask rgba-white-slight"></div>
-                    </a>
-                </div>
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <a class="btn btn-indigo btn-md" href="{{ url_for('bing.detail') }}">
-                            Live Show
-                            <i class="fa fa-image ml-1"></i>
-                        </a>
-                        <small class="text-muted">yyyy-MM-dd</small>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </div> {% endfor %}
+
     </div>
 
     <hr class="mb-5">
 
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1">Previous</a>
+    <nav aria-label="Page navigation example" class="m-4">
+        <ul class="pagination pagination-circle justify-content-center">
+            <li class="page-item {% if not others.has_prev %}disabled{% endif %}">
+                <a class="page-link" href="{{ url_for('bing.index',page=others.prev_num) }}">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
             </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#">Next</a>
+
+            {% for page in others.iter_pages(1,1,3,2) %} {% if page %}
+            <li class="page-item {%if page==others.page%}active{%endif%}">
+                <a class="page-link" href="{{ url_for('bing.index',page=page) }}">{{page}}</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#">&hellip;</a>
+            </li>
+            {% endif %} {% endfor %}
+
+            <li class="page-item {% if not others.has_next %}disabled{% endif %}">
+                <a class="page-link" href="{{ url_for('bing.index',page=others.next_num) }}">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
             </li>
         </ul>
     </nav>
 
 </div>
 
-{% endblock %}
+{% endif %} {% endblock %}

@@ -1,6 +1,8 @@
 from flask import Flask, render_template
+from flask_sqlalchemy import SQLAlchemy
 from config import Config
 
+db = SQLAlchemy()
 
 def create_app():
     app = Flask(__name__)
@@ -12,11 +14,11 @@ def create_app():
     from app.main import bp as main_bp
     app.register_blueprint(main_bp)
 
+    db.init_app(app)
+
     return app
 
-
 app = create_app()
-
 
 @app.errorhandler(400)
 def bad_request(e):

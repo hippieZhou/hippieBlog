@@ -1,26 +1,23 @@
-{% extends 'base.html' %}
-
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 
 <div class="container">
     <div class="row pt-4">
         <div class="jumbotron text-center">
-            <h4 class="card-title font-bold pb-2"><strong>Title</strong></h4>
+            <h4 class="card-title font-bold pb-2"><strong>{{ first.datetime.strftime('%Y-%m-%d') }}</strong></h4>
             <div class="view overlay my-4">
-                <img src="{{ url_for('static',filename='img/profile.jpg') }}" class="img-fluid" alt="">
+                <img src="{{ first.url }}" class="img-fluid" alt="">
                 <a>
                     <div class="mask rgba-white-slight"></div>
                 </a>
             </div>
             <h5 class="indigo-text font-bold mb-4">Photography</h5>
-            <figcaption class="figure-caption text-center mb-4">Copyright</figcaption>
+            <figcaption class="figure-caption text-center mb-4">@{{ first.copyright }}</figcaption>
             <p class="card-text text-left">
-                Description
+                @{{ first.description }}
             </p>
             <a class="fa-lg p-2 m-2 tw-ic"><i class="fa fa-heart red-text"></i></a>
             <a class="btn btn-outline-info btn-rounded waves-effect">
-                <i class="fa fa-download pr-2" aria-hidden="true"></i>
-                Download
+                <i class="fa fa-download pr-2" aria-hidden="true"></i> Download
             </a>
             <a class="fa-lg p-2 m-2 li-ic"><i class="fa fa-share-alt green-text"></i></a>
         </div>
