@@ -1,25 +1,25 @@
-{% extends 'base.html' %} {% block content %} {% if first and others %}
+{% extends 'base.html' %} {% block content %} {% if others %}
 
 <div class="container">
     <div class="row pt-4">
         <div class="col-md-7 mb-4">
             <div class="view overlay z-depth-1-half">
-                <img id="img" src="{{ first.url }}" class="card-img-top" alt="">
+                <img id="img" src="{{ others.items[0].url }}" class="card-img-top" alt="">
                 <div class="mask rgba-white-light"></div>
             </div>
         </div>
 
         <div class="col-md-5 mb-4">
-            <h2>{{ first.datetime.strftime('%Y-%m-%d') }}</h2>
+            <h2>{{ others.items[0].datetime.strftime('%Y-%m-%d') }}</h2>
             <hr>
             <p>
-                @{{ first.copyright }}
+                @{{ others.items[0].copyright }}
             </p>
             <a class="btn btn-indigo btn-md">
                 Download
                 <i class="fa fa-download ml-1"></i>
             </a>
-            <a class="btn btn-indigo btn-md" href="{{ url_for('bing.detail',hsh=first.hsh) }}">
+            <a class="btn btn-indigo btn-md" href="{{ url_for('bing.detail',hsh=others.items[0].hsh) }}">
                 Live Show
                 <i class="fa fa-image ml-1"></i>
             </a>
@@ -27,7 +27,7 @@
     </div>
     <div class="row">
 
-        {% for item in others.items %}
+        {% for item in others.items[1:] %}
         <div class="col-lg-4 col-md-12 mb-4">
             <div class="card">
                 <div class="view overlay zoom">
@@ -39,9 +39,9 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
                         <a class="btn btn-indigo btn-md" href="{{ url_for('bing.detail',hsh=item.hsh) }}">
-                                Live Show
-                                <i class="fa fa-image ml-1"></i>
-                            </a>
+                            Live Show
+                            <i class="fa fa-image ml-1"></i>
+                        </a>
                         <small class="text-muted">{{ item.datetime.strftime('%Y-%m-%d') }}</small>
                     </div>
                 </div>
