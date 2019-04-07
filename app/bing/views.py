@@ -6,8 +6,8 @@ from datetime import date
 
 @bp.route('/')
 def index():
-    from app.models import bing
-    bings = bing.query.order_by(bing.datetime.desc())
+    from app.models import Bing
+    bings = Bing.query.order_by(Bing.datetime.desc())
 
     first_time = bings.first().datetime.date()
     today = date.today()
@@ -16,7 +16,7 @@ def index():
         print('need to request new bing data')
         restore_bing_wallpapers()
 
-    bings = bing.query.order_by(bing.datetime.desc())
+    bings = Bing.query.order_by(Bing.datetime.desc())
     page = request.args.get('page', 1, type=int)
     others = bings.paginate(page, 10, False)
 
@@ -25,6 +25,6 @@ def index():
 
 @bp.route('/detail/<hsh>', methods=['GET', 'POST'])
 def detail(hsh):
-    from app.models import bing
-    first = bing.query.filter_by(hsh=hsh).first_or_404()
+    from app.models import Bing
+    first = Bing.query.filter_by(hsh=hsh).first_or_404()
     return render_template('bing/detail.html', first=first)

@@ -2,7 +2,7 @@ from datetime import datetime
 from app import db
 
 
-class bing(db.Model):
+class Bing(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     hsh = db.Column(db.String(120), nullable=True, unique=True)
     datetime = db.Column(db.DateTime, nullable=True, default=datetime.now)

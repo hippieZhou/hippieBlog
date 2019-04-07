@@ -1,6 +1,6 @@
 from app import db
 from datetime import datetime
-from app.models import bing
+from app.models import Bing
 import requests
 import urllib
 import json
@@ -42,11 +42,13 @@ def restore_bing_wallpapers():
                 desc = item['desc']
                 hsh = item['hsh']
 
-                model = bing(hsh=hsh, datetime=startdate, url=url,
+                model = Bing(hsh=hsh, datetime=startdate, url=url,
                              urlbase=urlbase, copyright=copyright,
                              title=title, caption=caption, description=desc)
-                print(model.hsh)
-                db.session.add(model)
+                has = Bing.query.filter_by(hsh=model.hsh).first()
+                if has is None:
+                    print(model.hsh)
+                    db.session.add(model)
             except Exception as e:
                 print(e)
                 continue
