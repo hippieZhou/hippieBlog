@@ -15,7 +15,7 @@
             <p>
                 @{{ others.items[0].copyright }}
             </p>
-            <a class="btn btn-indigo btn-md">
+            <a class="btn btn-indigo btn-md" onclick="download_image(this);">
                 Download
                 <i class="fa fa-download ml-1"></i>
             </a>
@@ -82,4 +82,27 @@
 
 </div>
 
-{% endif %} {% endblock %}
+{% endif %} {% endblock %} {% block scripts %}
+
+<script>
+    function download_image(btn) {
+        var a = document.getElementById("img");
+        var src = a.getAttribute("src");
+        console.info(src);
+
+        var x = new XMLHttpRequest();
+        x.open("GET", src, true);
+        x.responseType = 'blob';
+        x.onload = function(e) {
+            var url = window.URL.createObjectURL(x.response)
+            var a = document.createElement('a');
+            a.href = url
+            a.download = ''
+            a.click()
+        }
+        x.send();
+        return true;
+    }
+</script>
+
+{% endblock %}
