@@ -88,7 +88,6 @@
     function download_image(btn) {
         var a = document.getElementById("img");
         var src = a.getAttribute("src");
-        console.info(src);
 
         var x = new XMLHttpRequest();
         x.open("GET", src, true);
