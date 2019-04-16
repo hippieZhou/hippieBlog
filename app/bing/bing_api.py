@@ -45,9 +45,9 @@ def restore_bing_wallpapers():
                 model = Bing(hsh=hsh, datetime=startdate, url=url,
                              urlbase=urlbase, copyright=copyright,
                              title=title, caption=caption, description=desc)
-                has = Bing.query.filter_by(hsh=model.hsh).first()
+                has = Bing.query.filter_by(datetime=model.datetime).first()
                 if has is None:
-                    print(model.hsh)
+                    print(model.datetime)
                     db.session.add(model)
             except Exception as e:
                 print(e)
