@@ -13,7 +13,6 @@ def index():
     today = date.today()
     print(today, first_time)
     if(first_time < today):
-        print('need to request new bing data')
         restore_bing_wallpapers()
 
     bings = Bing.query.order_by(Bing.datetime.desc())
