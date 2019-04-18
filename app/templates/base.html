@@ -19,8 +19,6 @@
 
 <body>
 
-    <script type="text/javascript" src="{{ url_for('static',filename='js/canvas-nest.js') }}"></script>
-
     {% include "header.html" %}
 
     <!-- Start your project here-->
@@ -51,6 +49,7 @@
         new WOW().init();
     </script>
 
+    <script type="text/javascript" src="{{ url_for('static',filename='js/canvas-nest.js') }}" zIndex="-2"></script>
 </body>
 
 </html>
