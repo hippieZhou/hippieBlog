@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>hippieZhou</title>
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
@@ -14,7 +13,11 @@
     <!-- Material Design Bootstrap -->
     <link href="{{ url_for('static',filename='css/mdb.min.css') }}" rel="stylesheet">
     <!-- Your custom styles (optional) -->
-    <link href="{{ url_for('static',filename='css/style.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='css/style.css') }}" rel="stylesheet"> {% if title %}
+    <title>hippieZhou - {{ title }}</title>
+    {% else %}
+    <title>hippieZhou</title>
+    {% endif %}
 </head>
 
 <body>
