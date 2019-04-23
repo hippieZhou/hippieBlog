@@ -20,8 +20,8 @@ class Bing(db.Model):
 
     def get_json(self):
         return dict(
-            id=self.id,
-            datetime=self.datetime,
+            hsh=self.hsh,
+            datetime=self.datetime.strftime("%Y%m%d"),
             url=self.url,
             title=self.title,
             caption=self.caption,
