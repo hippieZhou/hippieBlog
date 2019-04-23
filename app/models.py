@@ -17,3 +17,13 @@ class Bing(db.Model):
 
     def __repr__(self):
         return "<Bing:%r>" % self.id
+
+    def get_json(self):
+        return dict(
+            id=self.id,
+            datetime=self.datetime,
+            url=self.url,
+            title=self.title,
+            caption=self.caption,
+            description=self.description
+        )
