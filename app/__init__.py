@@ -15,6 +15,9 @@ def create_app():
     from app.bing import bp as bing_bp
     app.register_blueprint(bing_bp, url_prefix='/bing')
 
+    from app.music import bp as music_bp
+    app.register_blueprint(music_bp, url_prefix='/music')
+
     from app.api import bp as api_bp
     app.register_blueprint(api_bp, url_prefix='/api')
 
