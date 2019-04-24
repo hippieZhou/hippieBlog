@@ -19,11 +19,8 @@ def bing():
     try:
         if fullstartdate:
             seed = datetime.strptime(fullstartdate, '%Y%m%d')
-            start = datetime(seed.year, seed.month, seed.day, 0, 0, 0)
-            end = datetime(seed.year, seed.month, seed.day, 23, 59, 59)
-            print(start, end)
-            first = Bing.query.filter(
-                Bing.datetime >= start, Bing.datetime <= end).first()
+            seed_str = '{0}%'.format(seed.strftime('%Y-%m-%d'))
+            first = Bing.query.filter(Bing.datetime.like(seed_str)).first()
             if first:
                 return jsonify(code=status.HTTP_200_OK, data=first.get_json())
             else:
