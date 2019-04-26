@@ -9,9 +9,9 @@ from . import bp
 @bp.route('/bing', methods=['GET'])
 def bing():
     headers = dict(request.headers)
-    token = headers.setdefault('Auth-Token', None)
+    token = headers.setdefault('Authorization', None)
     content_type = headers.setdefault('Content-Type', None)
-    if token != 'hippiezhou.fun' or content_type is None or content_type != "application/json":
+    if token != 'dev hippiezhou.fun' or content_type is None or content_type != "application/json; charset=utf-8":
         return jsonify(code=status.HTTP_403_FORBIDDEN, msg='not allowed.')
 
     from app.models import Bing
@@ -37,9 +37,9 @@ def bing():
 @bp.route('/bings', methods=['GET'])
 def bings():
     headers = dict(request.headers)
-    token = headers.setdefault('Auth-Token', None)
+    token = headers.setdefault('Authorization', None)
     content_type = headers.setdefault('Content-Type', None)
-    if token != 'hippiezhou.fun' or content_type is None or content_type != "application/json":
+    if token != 'dev hippiezhou.fun' or content_type is None or content_type != "application/json; charset=utf-8":
         return jsonify(code=status.HTTP_403_FORBIDDEN, msg='not allowed.')
 
     page = request.args.get('page', type=int)
