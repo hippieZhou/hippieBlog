@@ -1,4 +1,3 @@
-
 from flask import jsonify, request
 from datetime import datetime
 import random
@@ -6,12 +5,18 @@ import status
 from . import bp
 
 
-@bp.route('/bing', methods=['GET'])
-def bing():
+def auth():
     headers = dict(request.headers)
     token = headers.setdefault('Authorization', None)
     content_type = headers.setdefault('Content-Type', None)
-    if token != 'dev hippiezhou.fun' or content_type is None or content_type != "application/json; charset=utf-8":
+    return token == 'dev hippiezhou.fun' and content_type == "application/json; charset=utf-8"
+
+
+@bp.route('/bing', methods=['GET'])
+def bing():
+
+    ok = auth()
+    if ok == False:
         return jsonify(code=status.HTTP_403_FORBIDDEN, msg='not allowed.')
 
     from app.models import Bing
@@ -36,19 +41,18 @@ def bing():
 
 @bp.route('/bings', methods=['GET'])
 def bings():
-    headers = dict(request.headers)
-    token = headers.setdefault('Authorization', None)
-    content_type = headers.setdefault('Content-Type', None)
-    if token != 'dev hippiezhou.fun' or content_type is None or content_type != "application/json; charset=utf-8":
+
+    ok = auth()
+    if ok == False:
         return jsonify(code=status.HTTP_403_FORBIDDEN, msg='not allowed.')
 
     page = request.args.get('page', type=int)
     per_page = request.args.get('per_page', type=int)
 
-    if page is None or per_page is None:
-        return jsonify(code=status.HTTP_400_BAD_REQUEST, msg='arguements is error.')
-    else:
+    if page and per_page:
         from app.models import Bing
         val = Bing.query.order_by(
             Bing.datetime.desc()).paginate(page, per_page, False)
         return jsonify(code=status.HTTP_200_OK, data=[p.get_json() for p in val.items])
+    else:
+        return jsonify(code=status.HTTP_400_BAD_REQUEST, msg='arguements is error.')
