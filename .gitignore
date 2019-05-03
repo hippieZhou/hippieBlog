@@ -6,10 +6,5 @@ venv/
 ENV/
 logs/
 
-# mkdocs documentation
-/site
-
 # cache
 __pycache__/
-
-*.db
