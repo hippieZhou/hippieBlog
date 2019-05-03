@@ -1,6 +1,6 @@
 from flask import render_template, request
 from . import bp
-from .bing_api import restore_bing_wallpapers
+from .bing_spider import restore_bing_wallpapers
 from datetime import date
 
 
