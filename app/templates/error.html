@@ -1,0 +1,8 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container text-center animated fadeInDown" style="height:100vh;">
+    <div class=" py-5 px-4 my-5">
+        <h1 class="h1-responsive font-weight-bold my-5">{{code}}</h1>
+        <a href="{{ url_for('main.index') }}" class="btn btn-info waves-effect">Let's Go Home</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from config import Config
+import status
 
 db = SQLAlchemy()
 
@@ -28,14 +29,14 @@ app = create_app()
 
 @app.errorhandler(400)
 def bad_request(e):
-    return render_template('errors/400.html'), 400
+    return render_template('error.html', code=status.HTTP_400_BAD_REQUEST), 400
 
 
 @app.errorhandler(404)
 def page_not_found(e):
-    return render_template('errors/404.html'), 404
+    return render_template('error.html', code=status.HTTP_404_NOT_FOUND), 404
 
 
 @app.errorhandler(500)
 def internale_server_error(e):
-    return render_template('errors/500.html'), 500
+    return render_template('error.html', code=status.HTTP_500_INTERNAL_SERVER_ERROR), 500
