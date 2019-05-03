@@ -10,7 +10,7 @@ def create_app():
     app.config.from_object(Config)
 
     from app.main import bp as main_bp
-    app.register_blueprint(main_bp)
+    app.register_blueprint(main_bp, url_prefix='')
 
     from app.bing import bp as bing_bp
     app.register_blueprint(bing_bp, url_prefix='/bing')

@@ -5,19 +5,28 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="transparent">
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/icons/icon-152x152.png') }}">
+
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link href="https://cdn.bootcss.com/font-awesome/5.8.1/css/all.css" rel="stylesheet">
     <!-- Bootstrap core CSS -->
     <link href="{{ url_for('static',filename='css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- Material Design Bootstrap -->
     <link href="{{ url_for('static',filename='css/mdb.min.css') }}" rel="stylesheet">
     <!-- Your custom styles (optional) -->
-    <link href="{{ url_for('static',filename='css/style.css') }}" rel="stylesheet"> {% if title %}
+    <link href="{{ url_for('static',filename='css/style.css') }}" rel="stylesheet">
+
+    <!-- Start your title here-->
+    {% if title %}
     <title>hippieZhou - {{ title }}</title>
     {% else %}
     <title>hippieZhou</title>
     {% endif %}
+    <!-- /Start your title here-->
 </head>
 
 <body>
@@ -29,8 +38,6 @@
     <!-- /Start your project here-->
 
     {% include "fooder.html" %}
-
-    <!-- SCRIPTS -->
 
     <!-- Start your js here-->
     {% block scripts %}{% endblock %}
@@ -44,16 +51,16 @@
     <script type="text/javascript" src="{{ url_for('static',filename='js/bootstrap.min.js') }}"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="{{ url_for('static',filename='js/mdb.min.js') }}"></script>
-
+    <!-- Backtotop JavaScript -->
     <script type="text/javascript" src="{{ url_for('static',filename='js/backtotop.js') }}"></script>
-
+    <!-- PWA JavaScript -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <!-- canvas-nest animation JavaScript -->
+    <script type="text/javascript" src="{{ url_for('static',filename='js/canvas-nest.js') }}" opacity='0.1' zIndex="-2"></script>
     <script type="text/javascript">
         // Animations initialization
         new WOW().init();
     </script>
-
-    <script type="text/javascript" src="{{ url_for('static',filename='js/canvas-nest.js') }}" opacity='0.1'
-        zIndex="-2"></script>
 </body>
 
 </html>
