@@ -1,9 +1,12 @@
+import click
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 from config import Config
 import status
 
 db = SQLAlchemy()
+migrate = Migrate()
 
 
 def create_app():
@@ -20,6 +23,8 @@ def create_app():
     app.register_blueprint(api_bp, url_prefix='/api')
 
     db.init_app(app)
+
+    migrate.init_app(app, db)
 
     return app
 
