@@ -10,7 +10,7 @@ migrate = Migrate()
 
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__, instance_relative_config=True)
     app.config.from_object(Config)
 
     from app.main import bp as main_bp
@@ -25,6 +25,9 @@ def create_app():
     db.init_app(app)
 
     migrate.init_app(app, db)
+
+    from app.cmds import init_db_command
+    app.cli.add_command(init_db_command)
 
     return app
 
