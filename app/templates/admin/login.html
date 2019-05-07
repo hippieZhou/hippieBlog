@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container text-center" style="height:100vh;">
+
+    <form action="" method="POST" class="border border-light py-5 px-4 my-5"
+        style="display: inline-block;margin-bottom: auto;vertical-align: middle;">
+
+        {{ form.csrf_token }}
+
+        <p class="h4 mb-4">Admin</p>
+
+        {{ form.email }}
+        {{ form.pwd }}
+
+        <div class="d-flex justify-content-around">
+            <div>
+                <div class="custom-control custom-checkbox">
+                    {{form.remember_me }}
+                    <label class="custom-control-label" for="remember_me">Remember me</label>
+                </div>
+            </div>
+        </div>
+        {{ form.submit }}
+
+        <div>
+            {% if form.errors %}
+            {{ form.errors }}
+            {% endif %}
+        </div>
+    </form>
+
+
+</div>
+{% endblock %}

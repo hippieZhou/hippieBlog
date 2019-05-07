@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container" style="height:100vh;">
+    <div class="row my-4">
+        <div class="col-md-8">
+            {% if current_user.is_authenticated %}
+            <h1>Hi {{ current_user.name }}!</h1>
+            {% endif %}</div>
+        <div class="col-md-4 text-right">
+            <a class="nav-link" href="{{url_for('admin.logout')}}">
+                <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

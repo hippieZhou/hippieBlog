@@ -34,6 +34,14 @@
     {% include "header.html" %}
 
     <!-- Start your project here-->
+    <div class="text-center">
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-primary" role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+
     {% block content %} {% endblock %}
     <!-- /Start your project here-->
 
@@ -50,7 +58,8 @@
     <!-- Bootstrap core JavaScript -->
     <script type="text/javascript" src="{{ url_for('static',filename='js/bootstrap.min.js') }}"></script>
     <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/js/mdb.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/js/mdb.min.js"></script>
     <!-- Backtotop JavaScript -->
     <script type="text/javascript" src="{{ url_for('static',filename='js/backtotop.js') }}"></script>
     <!-- PWA JavaScript -->
