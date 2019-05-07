@@ -7,8 +7,7 @@ from flask.cli import with_appcontext
 
 
 def init_admin(name, email, pwd):
-    users = User.query.filter(User.name == name).all()
-    map(db.session.delete, users)
+    User.query.filter(User.name == name).delete()
     db.session.commit()
 
     user = User(name=name, email=email, pwd=pwd)

@@ -36,7 +36,7 @@ def create_app():
     migrate.init_app(app, db, render_as_batch=True)
     login_manager.init_app(app)
 
-    from app.cmds import init_admin_command
+    from app.commands import init_admin_command
     app.cli.add_command(init_admin_command)
 
     return app

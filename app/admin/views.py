@@ -38,14 +38,12 @@ def login():
         email = form.email.data
         pwd = form.pwd.data
         user = User.query.filter_by(email=email).first()
-        # if user and user.check_password_hash(pwd):
-        if user:
-            print(current_user.is_authenticated)
+        if user and user.name and user.email and user.check_password_hash(pwd):
             login_user(user)
             flash('Logged in successfully.')
             return redirect(url_for('admin.index'))
         else:
-            flash('E-mail/Password is error.', category='error')
+            flash('E-mail/Password Is Error.', category='error')
     return render_template('/admin/login.html', title='Login', form=form)
 
 
@@ -53,4 +51,4 @@ def login():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('bing.index'))
+    return redirect(url_for('admin.login'))
