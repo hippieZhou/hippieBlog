@@ -47,3 +47,13 @@ class User(db.Model, UserMixin):
 
     def check_password_hash(self, pwd):
         return check_password_hash(self.pwd, pwd)
+
+
+class Visitor(db.Model):
+    __tablename__ = 'visitors'
+
+    id = db.Column(db.Integer, primary_key=True)
+    addr = db.Column(db.String(15), nullable=False)
+
+    def __repr__(self):
+        return "<Visitor:%r>" % self.addr

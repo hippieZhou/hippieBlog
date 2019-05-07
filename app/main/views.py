@@ -3,7 +3,22 @@ from . import bp
 
 
 @bp.route('/')
+@bp.route('/index')
 def index():
+    from flask import request
+    trusted_proxies = {'127.0.0.1'}
+    route = request.access_route + [request.remote_addr]
+    remote_addr = next((addr for addr in reversed(route)
+                        if addr not in trusted_proxies), request.remote_addr)
+    print(remote_addr)
+    from app.models import Visitor
+    has = Visitor.query.filter(Visitor.addr == remote_addr).first()
+    if not has:
+        from app import db
+        visitor = Visitor(addr=remote_addr)
+        db.session.add(visitor)
+        db.session.commit()
+
     return render_template('main/index.html')
 
 
