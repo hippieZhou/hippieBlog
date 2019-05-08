@@ -10,7 +10,7 @@ def index():
     route = request.access_route + [request.remote_addr]
     remote_addr = next((addr for addr in reversed(route)
                         if addr not in trusted_proxies), request.remote_addr)
-    print(remote_addr)
+    # print(remote_addr)
     from app.models import Visitor
     has = Visitor.query.filter(Visitor.addr == remote_addr).first()
     if not has:
