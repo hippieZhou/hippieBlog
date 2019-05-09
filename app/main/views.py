@@ -1,5 +1,5 @@
 from flask import (render_template, make_response, send_from_directory)
-from . import bp
+from app.main import bp
 
 
 @bp.route('/')

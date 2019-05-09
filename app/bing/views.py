@@ -1,7 +1,7 @@
 from flask import render_template, request
 from datetime import date
 
-from . import bp
+from app.bing import bp
 
 
 @bp.route('/')
@@ -11,7 +11,6 @@ def index():
 
     first_time = bings.first().datetime.date()
     today = date.today()
-    print(today, first_time)
     if(first_time < today):
         from app.utils import bing_spider
         bing_spider.restore_bing_wallpapers()

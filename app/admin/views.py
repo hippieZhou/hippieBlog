@@ -1,4 +1,4 @@
-from . import bp
+from app.admin import bp
 
 from app import login_manager
 from app.models import User
