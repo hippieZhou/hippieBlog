@@ -23,7 +23,6 @@ def today():
     #     return jsonify(code=status.HTTP_403_FORBIDDEN, msg='not allowed.')
     from app.models import Bing
     today = Bing.query.order_by(Bing.datetime.desc()).first_or_404()
-    print(today)
     return jsonify(
         code=status.HTTP_200_OK,
         data=today.get_json()
