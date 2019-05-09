@@ -1,8 +1,12 @@
+from app.utils.redprint import Redprint
+
 from flask import jsonify, request
 from datetime import datetime
 import random
 import status
-from . import bp
+
+
+api = Redprint('bing')
 
 
 def auth():
@@ -12,8 +16,21 @@ def auth():
     return token == 'dev hippiezhou.fun' and content_type == "application/json; charset=utf-8"
 
 
-@bp.route('/bing', methods=['GET'])
-def bing():
+@api.route('/today', methods=['GET'])
+def today():
+    # ok = auth()
+    # if ok == False:
+    #     return jsonify(code=status.HTTP_403_FORBIDDEN, msg='not allowed.')
+    from app.models import Bing
+    today = Bing.query.order_by(Bing.datetime.desc()).first_or_404()
+    return jsonify(
+        code=status.HTTP_200_OK,
+        data=today.get_json()
+    )
+
+
+@api.route('/oneday', methods=['GET'])
+def oneday():
 
     ok = auth()
     if ok == False:
@@ -39,8 +56,8 @@ def bing():
                        data=random.choice(bings).get_json())
 
 
-@bp.route('/bings', methods=['GET'])
-def bings():
+@api.route('/all', methods=['GET'])
+def all():
 
     ok = auth()
     if ok == False:

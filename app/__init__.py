@@ -25,8 +25,9 @@ def create_app():
     from app.bing import bp as bing_bp
     app.register_blueprint(bing_bp, url_prefix='/bing')
 
-    from app.api import bp as api_bp
-    app.register_blueprint(api_bp, url_prefix='/api')
+    from app.api.v1 import create_blueprint_v1
+    bp_v1 = create_blueprint_v1()
+    app.register_blueprint(bp_v1, url_prefix='/v1')
 
     from app.admin import bp as admin_bp
     app.register_blueprint(admin_bp, url_prefix='/admin')
