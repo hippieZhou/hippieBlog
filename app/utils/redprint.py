@@ -16,3 +16,10 @@ class Redprint():
         for f, rule, options in self.mound:
             endpoint = options.pop("endpoint", f.__name__)
             bp.add_url_rule(url_prfix + rule, endpoint, f, **options)
+
+
+# usage：
+# def create_blueprint_v1():
+#     bp = Blueprint('v1', __name__)
+#     bing.api.register(bp, url_prfix='/bing')
+#     return bp
