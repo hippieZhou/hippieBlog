@@ -10,19 +10,21 @@ api = Api(bp,
 
 ns = api.namespace(name='Home', description='The Test API')
 
+
 @ns.route('/')
 class HelloWorld(Resource):
     def get(self):
         return {
-            'status': status.HTTP_200_OK,
+            'code': status.HTTP_200_OK,
             'msg': 'you get a request.'
         }
 
     def post(self):
         return {
-            'status': status.HTTP_200_OK,
+            'code': status.HTTP_200_OK,
             'msg': 'you post a request.'
         }
+
 
 from app.api.v1.bings import ns as bings_namespace
 api.add_namespace(bings_namespace)

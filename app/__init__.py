@@ -1,3 +1,5 @@
+import logging.config
+
 import click
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
@@ -6,6 +8,12 @@ from flask_login import LoginManager
 from flask_restplus import Api
 from config import Config
 import status
+import os
+
+logging_conf_path = os.path.normpath(os.path.join(
+    os.path.dirname(__file__), '../logging.conf'))
+logging.config.fileConfig(logging_conf_path)
+log = logging.getLogger(__name__)
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -27,10 +35,6 @@ def create_app():
     from app.bing import bp as bing_bp
     app.register_blueprint(bing_bp, url_prefix='/bing')
 
-    # from app.api.v1 import create_blueprint_v1
-    # bp_v1 = create_blueprint_v1()
-    # app.register_blueprint(bp_v1, url_prefix='/v1')
-
     from app.admin import bp as admin_bp
     app.register_blueprint(admin_bp, url_prefix='/admin')
 
@@ -43,6 +47,8 @@ def create_app():
 
     from app.commands import init_admin_command
     app.cli.add_command(init_admin_command)
+
+    log.info('>>>>> Starting development server <<<<<')
 
     return app
 

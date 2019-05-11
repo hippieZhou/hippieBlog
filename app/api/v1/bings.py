@@ -4,7 +4,7 @@ from datetime import datetime
 from app.api import api
 from app.api.parsers import pagination_arguments
 from app.api.serializers import page_of_bings
-
+import status
 
 ns = api.namespace('Bing', description='The WebAPI of Bing Wallpapers.')
 
@@ -16,6 +16,11 @@ ns = api.namespace('Bing', description='The WebAPI of Bing Wallpapers.')
 class BingList(Resource):
     @api.expect(pagination_arguments, validate=True)
     @api.marshal_with(page_of_bings)
+    @api.doc(responses={
+        status.HTTP_400_BAD_REQUEST: 'HTTP_400_BAD_REQUEST',
+        status.HTTP_404_NOT_FOUND: 'HTTP_404_NOT_FOUND',
+        status.HTTP_500_INTERNAL_SERVER_ERROR: 'HTTP_500_INTERNAL_SERVER_ERROR'
+    })
     def get(self, year=None, month=None, day=None):
         from flask import request
         args = pagination_arguments.parse_args(request)
