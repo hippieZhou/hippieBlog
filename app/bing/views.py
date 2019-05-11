@@ -7,15 +7,15 @@ from app.bing import bp
 @bp.route('/')
 def index():
     from app.models import Bing
-    bings = Bing.query.order_by(Bing.datetime.desc())
+    bings = Bing.query.order_by(Bing.pub_date.desc())
 
-    first_time = bings.first().datetime.date()
+    first_time = bings.first().pub_date.date()
     today = date.today()
     if(first_time < today):
         from app.utils import bing_spider
         bing_spider.restore_bing_wallpapers()
 
-    bings = Bing.query.order_by(Bing.datetime.desc())
+    bings = Bing.query.order_by(Bing.pub_date.desc())
     page = request.args.get('page', 1, type=int)
     others = bings.paginate(page, 10, False)
 

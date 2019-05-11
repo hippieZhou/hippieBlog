@@ -42,7 +42,7 @@ def oneday():
         try:
             seed = datetime.strptime(fullstartdate, '%Y%m%d')
             seed_str = '{0}%'.format(seed.strftime('%Y-%m-%d'))
-            first = Bing.query.filter(Bing.datetime.like(seed_str)).first()
+            first = Bing.query.filter(Bing.pub_date.like(seed_str)).first()
             if first:
                 return jsonify(code=status.HTTP_200_OK, data=first.get_json())
             else:
@@ -69,7 +69,7 @@ def all():
     if page and per_page:
         from app.models import Bing
         val = Bing.query.order_by(
-            Bing.datetime.desc()).paginate(page, per_page, False)
+            Bing.pub_date.desc()).paginate(page, per_page, False)
         return jsonify(code=status.HTTP_200_OK, data=[p.get_json() for p in val.items])
     else:
         return jsonify(code=status.HTTP_400_BAD_REQUEST, msg='arguements is error.')

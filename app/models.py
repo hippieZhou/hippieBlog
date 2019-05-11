@@ -9,7 +9,7 @@ class Bing(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     hsh = db.Column(db.String(120), nullable=True, unique=True)
-    datetime = db.Column(db.DateTime, nullable=True, default=datetime.now)
+    pub_date = db.Column(db.DateTime, nullable=True, default=datetime.now)
     url = db.Column(db.String(120), nullable=True)
     urlbase = db.Column(db.String(120), nullable=True)
     copyright = db.Column(db.Text)
@@ -23,7 +23,7 @@ class Bing(db.Model):
     def get_json(self):
         return dict(
             hsh=self.hsh,
-            datetime=self.datetime.strftime("%Y%m%d"),
+            pub_date=self.pub_date.strftime("%Y%m%d"),
             url=self.url,
             title=self.title,
             caption=self.caption,

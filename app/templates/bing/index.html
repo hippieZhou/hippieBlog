@@ -10,7 +10,7 @@
         </div>
 
         <div class="col-md-5 mb-4">
-            <h2>{{ others.items[0].datetime.strftime('%Y-%m-%d') }}</h2>
+            <h2>{{ others.items[0].pub_date.strftime('%Y-%m-%d') }}</h2>
             <hr>
             <p>
                 @{{ others.items[0].copyright }}
@@ -42,7 +42,7 @@
                             Live Show
                             <i class="fa fa-image ml-1"></i>
                         </a>
-                        <small class="text-muted">{{ item.datetime.strftime('%Y-%m-%d') }}</small>
+                        <small class="text-muted">{{ item.pub_date.strftime('%Y-%m-%d') }}</small>
                     </div>
                 </div>
             </div>
