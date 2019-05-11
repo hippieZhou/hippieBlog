@@ -7,7 +7,7 @@ bing = api.model('Bing', {
     'caption': fields.String(required=True, description='The caption of wallpaper'),
     'hsh': fields.String(readOnly=True, description='The unique identifier of a bing'),
     'description': fields.String(required=True, description='The description of wallpaper'),
-    'datetime': fields.DateTime
+    'pub_date': fields.DateTime
 })
 
 pagination = api.model('A page of results', {

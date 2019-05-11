@@ -5,14 +5,10 @@ import status
 bp = Blueprint('api', __name__)
 api = Api(bp,
           version='1.0',
-          title='Main',
+          title='hippieZhou - SwaggerUI',
           description='Main APIs')
 
 ns = api.namespace(name='Home', description='The Test API')
-
-from app.api.v1.bings import ns as bings_namespace
-api.add_namespace(bings_namespace)
-
 
 @ns.route('/')
 class HelloWorld(Resource):
@@ -27,3 +23,6 @@ class HelloWorld(Resource):
             'status': status.HTTP_200_OK,
             'msg': 'you post a request.'
         }
+
+from app.api.v1.bings import ns as bings_namespace
+api.add_namespace(bings_namespace)

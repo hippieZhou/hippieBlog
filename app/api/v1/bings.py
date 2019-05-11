@@ -8,17 +8,6 @@ import status
 ns = api.namespace('Bing', description='The WebAPI of Bing Wallpapers.')
 
 
-class BingDAO(object):
-    def get(self, year: int):
-        pass
-
-    def get(self, year: int, month: int):
-        pass
-
-    def get(self, year: int, month, day: int):
-        pass
-
-
 @ns.route('/<int:year>/')
 @ns.route('/<int:year>/<int:month>/')
 @ns.route('/<int:year>/<int:month>/<int:day>/')
@@ -37,13 +26,9 @@ class BingList(Resource):
         end_day = day + 1 if day else 31
         start_date = '{0:04d}-{1:02d}-{2:02d}'.format(
             year, start_month, start_day)
-        end_date = '{0:04d}-{1:02d}-{2:02d}'.format(year, end_month, end_day)
+        end_date = '{0:04d}-{1:02d}-{2:02d}'.format(
+            year, end_month, end_day)
         bings_query = Bing.query.filter(
-            Bing.datetime >= start_date).filter(Bing.datetime <= end_date)
-
+            Bing.pub_date >= start_date).filter(Bing.pub_date <= end_date).order_by(Bing.pub_date.desc())
         bings_page = bings_query.paginate(page, per_page, error_out=False)
-
-        return {
-            'status': status.HTTP_200_OK,
-            'data': bings_page
-        }
+        return bings_page
