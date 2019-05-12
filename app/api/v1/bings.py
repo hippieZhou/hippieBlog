@@ -9,11 +9,11 @@ import status
 # models
 
 bing = api.model('Bing', {
-    'url': fields.String(required=True, description='The url of wallpaper'),
-    'title': fields.String(required=True, description='The title of wallpaper'),
-    'caption': fields.String(required=True, description='The caption of wallpaper'),
-    'hsh': fields.String(readOnly=True, description='The unique identifier of a bing'),
-    'description': fields.String(required=True, description='The description of wallpaper'),
+    'hsh': fields.String(required=True, description='The unique identifier of a bing'),
+    'url': fields.String(readOnly=True, description='The url of wallpaper'),
+    'title': fields.String(readOnly=True, description='The title of wallpaper'),
+    'caption': fields.String(readOnly=True, description='The caption of wallpaper'),
+    'description': fields.String(readOnly=True, description='The description of wallpaper'),
     'pub_date': fields.DateTime
 })
 
