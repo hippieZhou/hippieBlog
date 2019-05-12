@@ -38,8 +38,8 @@ def create_app():
     from app.admin import bp as admin_bp
     app.register_blueprint(admin_bp, url_prefix='/admin')
 
-    from app.api import bp as api_bp
-    app.register_blueprint(api_bp, url_prefix='/api')
+    from app.api.v1 import bp as api_v1_bp
+    app.register_blueprint(api_v1_bp, url_prefix='/api/v1')
 
     db.init_app(app)
     migrate.init_app(app, db, render_as_batch=True)
