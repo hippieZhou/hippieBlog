@@ -1,4 +1,4 @@
-from app import db
+from app import db, log
 from datetime import datetime
 from app.models import Bing
 import requests
@@ -85,14 +85,14 @@ def restore_bing_wallpapers():
                 desc = item['desc']
                 hsh = item['hsh']
 
-                model = Bing(hsh=hsh, datetime=startdate, url=url,
+                model = Bing(hsh=hsh, pub_date=startdate, url=url,
                              urlbase=urlbase, copyright=copyright,
                              title=title, caption=caption, description=desc)
-                has = Bing.query.filter_by(datetime=model.datetime).first()
+                has = Bing.query.filter_by(pub_date=model.pub_date).first()
                 if has is None:
-                    print(model.datetime)
+                    log.info(model.pub_date)
                     db.session.add(model)
             except Exception as e:
-                print(e)
+                log.error(e)
                 continue
         db.session.commit()
