@@ -1,14 +1,14 @@
-from app.api.v1 import api
 from app.models import Bing
 from flask import request
-from flask_restplus import Resource, fields, reqparse
+from flask_restplus import Namespace, Resource, fields, reqparse
 from datetime import datetime
 import status
 
+ns = Namespace('bing', description='The RESTful APIs of Bing Wallpapers')
 
 # models
 
-bing = api.model('Bing', {
+bing = ns.model('Bing', {
     'hsh': fields.String(required=True, description='The unique identifier of a bing'),
     'url': fields.String(readOnly=True, description='The url of wallpaper'),
     'title': fields.String(readOnly=True, description='The title of wallpaper'),
@@ -17,14 +17,14 @@ bing = api.model('Bing', {
     'pub_date': fields.DateTime
 })
 
-pagination = api.model('A page of results', {
+pagination = ns.model('A page of results', {
     'page': fields.Integer(description='Number of this page of results'),
     'pages': fields.Integer(description='Total number of pages of results'),
     'per_page': fields.Integer(description='Number of items per page of results'),
     'total': fields.Integer(description='Total number of results'),
 })
 
-page_of_bings = api.inherit('Page of bings', pagination, {
+page_of_bings = ns.inherit('Page of bings', pagination, {
     'items': fields.List(fields.Nested(bing))
 })
 
@@ -32,15 +32,13 @@ page_of_bings = api.inherit('Page of bings', pagination, {
 # arguments
 
 pagination_arguments = reqparse.RequestParser()
-pagination_arguments.add_argument('authorization', type=str, required=True,
-                                  location='headers', help='Bearer Access Token')
-pagination_arguments.add_argument(
-    'page', type=int, required=False, default=1, help='Page number')
-pagination_arguments.add_argument('per_page', type=int, required=False, choices=[2, 10, 20, 30, 40, 50],
+pagination_arguments.add_argument('authorization',
+                                  type=str, required=True,  location='headers', help='Bearer Access Token')
+pagination_arguments.add_argument('page',
+                                  type=int, required=False, default=1, help='Page number')
+pagination_arguments.add_argument('per_page',
+                                  type=int, required=False, choices=[2, 10, 20, 30, 40, 50],
                                   default=10, help='Results per page {error_msg}')
-
-
-ns = api.namespace('bing', description='The RESTful APIs of Bing Wallpapers')
 
 
 @ns.route('/')
@@ -48,9 +46,10 @@ ns = api.namespace('bing', description='The RESTful APIs of Bing Wallpapers')
 @ns.route('/<int:year>/<int:month>/')
 @ns.route('/<int:year>/<int:month>/<int:day>/')
 class BingList(Resource):
-    @api.expect(pagination_arguments, validate=True)
-    @api.marshal_with(page_of_bings)
-    @api.doc(responses={
+    @ns.expect(pagination_arguments, validate=True)
+    @ns.marshal_with(page_of_bings)
+    @ns.doc(responses={
+        status.HTTP_200_OK: 'HTTP_200_OK',
         status.HTTP_400_BAD_REQUEST: 'HTTP_400_BAD_REQUEST',
         status.HTTP_401_UNAUTHORIZED: 'HTTP_401_UNAUTHORIZED',
         status.HTTP_404_NOT_FOUND: 'HTTP_404_NOT_FOUND',
