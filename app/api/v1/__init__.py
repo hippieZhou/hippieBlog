@@ -15,14 +15,15 @@ import status
 bp = Blueprint('api', __name__, template_folder='templates')
 api = Api(bp,
           version='1.0',
-          title='hippieZhou - SwaggerUI',
+          title='DevOps - SwaggerUI',
           contact="Author",
           contact_email='hippiezhou@outlook.com',
-          description='Main APIs')
+          description='Main APIs\n'
+                    'Since:2019-01-01')
 
 
 from .auth import ns as auth_namespace
 api.add_namespace(auth_namespace)
 
-from .bings import ns as bings_namespace
-api.add_namespace(bings_namespace)
+from .bing import ns as bing_namespace
+api.add_namespace(bing_namespace)

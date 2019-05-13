@@ -32,6 +32,8 @@ page_of_bings = api.inherit('Page of bings', pagination, {
 # arguments
 
 pagination_arguments = reqparse.RequestParser()
+pagination_arguments.add_argument('authorization', type=str, required=True,
+                                  location='headers', help='Bearer Access Token')
 pagination_arguments.add_argument(
     'page', type=int, required=False, default=1, help='Page number')
 pagination_arguments.add_argument('per_page', type=int, required=False, choices=[2, 10, 20, 30, 40, 50],
@@ -55,25 +57,30 @@ class BingList(Resource):
         status.HTTP_500_INTERNAL_SERVER_ERROR: 'HTTP_500_INTERNAL_SERVER_ERROR'
     })
     def get(self, year=None, month=None, day=None):
-        from flask import request
         args = pagination_arguments.parse_args(request)
 
-        page = args.get('page', 1)
-        per_page = args.get('per_page', 10)
+        auth = args.get('authorization', None)
+        from app.models import Visitor
+        has = Visitor.query.filter(Visitor.addr == auth).first()
+        if not has:
+            return status.HTTP_401_UNAUTHORIZED
+        else:
+            page = args.get('page', 1)
+            per_page = args.get('per_page', 10)
 
-        start_year = year if year else 2000
-        end_year = year if year else datetime.now().year
-        start_month = month if month else 1
-        end_month = month if month else 12
-        start_day = day if day else 1
-        end_day = day + 1 if day else 31
-        start_date = '{0:04d}-{1:02d}-{2:02d}'.format(
-            start_year, start_month, start_day)
-        end_date = '{0:04d}-{1:02d}-{2:02d}'.format(
-            end_year, end_month, end_day)
+            start_year = year if year else 2000
+            end_year = year if year else datetime.now().year
+            start_month = month if month else 1
+            end_month = month if month else 12
+            start_day = day if day else 1
+            end_day = day + 1 if day else 31
+            start_date = '{0:04d}-{1:02d}-{2:02d}'.format(
+                start_year, start_month, start_day)
+            end_date = '{0:04d}-{1:02d}-{2:02d}'.format(
+                end_year, end_month, end_day)
 
-        bings_query = Bing.query.filter(
-            Bing.pub_date >= start_date).filter(Bing.pub_date <= end_date).order_by(Bing.pub_date.desc())
-        bings_page = bings_query.paginate(page, per_page, error_out=False)
+            bings_query = Bing.query.filter(
+                Bing.pub_date >= start_date).filter(Bing.pub_date <= end_date).order_by(Bing.pub_date.desc())
+            bings_page = bings_query.paginate(page, per_page, error_out=False)
 
-        return bings_page
+            return bings_page
