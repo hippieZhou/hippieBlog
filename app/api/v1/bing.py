@@ -59,11 +59,12 @@ class BingList(Resource):
         args = pagination_arguments.parse_args(request)
 
         auth = args.get('authorization', None)
+        ip = request.remote_addr
+
         from app.models import Visitor
-        has = Visitor.query.filter(Visitor.addr == auth).first()
-        if not has:
-            return status.HTTP_401_UNAUTHORIZED
-        else:
+        has = Visitor.query.filter(Visitor.addr == ip).first()
+        from werkzeug.security import check_password_hash
+        if has and check_password_hash(auth, ip):
             page = args.get('page', 1)
             per_page = args.get('per_page', 10)
 
@@ -83,3 +84,5 @@ class BingList(Resource):
             bings_page = bings_query.paginate(page, per_page, error_out=False)
 
             return bings_page
+        else:
+            return {'code': status.HTTP_401_UNAUTHORIZED}
