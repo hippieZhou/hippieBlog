@@ -1,11 +1,16 @@
 {% extends 'base.html' %} {% block content %}
-<div class="view full-page-intro" style="background-image: url({{ url_for('static',filename='img/wallpaper.jpg') }});background-repeat:no-repeat;background-size:cover;height:100vh;">
+<div class="view full-page-intro"
+    style="background-image: url({{ url_for('static',filename='img/wallpaper.jpg') }});background-repeat:no-repeat;background-size:cover;height:100vh;">
     <div class="text-white text-center py-5 px-4 my-5">
         <div>
             <h2 class="card-title h1-responsive pt-3 mb-5 font-bold"><strong>Stop Working, Start Amazing.</strong></h2>
             <p class="mx-5 mb-5">May I have your attention ?</p>
-            <a class="btn btn-outline-white btn-md" href="{{ url_for('bing.index') }}"><i class="fa fa-camera-retro"></i>&nbsp;&nbsp;View Bings</a>
-            <a class="btn btn-outline-white btn-md" href="{{ url_for('api.doc') }}"><i class="fas fa-book-open"></i>&nbsp;&nbsp;View Docs</a>
+            <a class="btn btn-outline-white btn-md" href="{{ url_for('bing.index') }}"><i
+                    class="fa fa-camera-retro"></i>&nbsp;&nbsp;View Bings</a>
+            <a class="btn btn-outline-white btn-md" href="{{ url_for('github.index') }}"><i
+                    class="fas fa-book-open"></i>&nbsp;&nbsp;Github Rank</a>
+            <a class="btn btn-outline-white btn-md" href="{{ url_for('api.doc') }}"><i
+                    class="fas fa-book-open"></i>&nbsp;&nbsp;View Docs</a>
         </div>
     </div>
 </div>
