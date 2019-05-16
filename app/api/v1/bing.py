@@ -63,8 +63,10 @@ class BingList(Resource):
 
         from app.models import Visitor
         has = Visitor.query.filter(Visitor.addr == ip).first()
-        from werkzeug.security import check_password_hash
-        if has and check_password_hash(auth, ip):
+        from hashlib import md5
+        h = md5()
+        h.update(ip.encode(encoding='utf-8'))
+        if has and auth == h.hexdigest():
             page = args.get('page', 1)
             per_page = args.get('per_page', 10)
 

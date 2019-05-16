@@ -21,7 +21,9 @@ class Auth(Resource):
                 visitor = Visitor(addr=remote_addr)
                 db.session.add(visitor)
                 db.session.commit()
-            from werkzeug.security import generate_password_hash
-            return {'code': status.HTTP_200_OK, 'token': generate_password_hash(ip)}
+            from hashlib import md5
+            h = md5()
+            h.update(ip.encode(encoding='utf-8'))
+            return {'code': status.HTTP_200_OK, 'token': h.hexdigest()}
         else:
             return {'code': status.HTTP_401_UNAUTHORIZED}
