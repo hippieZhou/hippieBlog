@@ -35,9 +35,6 @@ def create_app():
     from app.bing import bp as bing_bp
     app.register_blueprint(bing_bp, url_prefix='/bing')
 
-    from app.github import bp as github_bp
-    app.register_blueprint(github_bp, url_prefix='/github')
-
     from app.admin import bp as admin_bp
     app.register_blueprint(admin_bp, url_prefix='/admin')
 
