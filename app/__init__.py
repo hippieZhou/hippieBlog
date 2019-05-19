@@ -60,7 +60,9 @@ app = create_app()
 def inject_user():
     from flask_login import current_user
     user = current_user
-    return dict(user=user)
+    from datetime import datetime
+    year = datetime.now().year
+    return dict(user=user, year=year)
 
 
 @app.errorhandler(400)
