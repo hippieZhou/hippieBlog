@@ -1,15 +1,16 @@
 from flask_restplus import Namespace, Resource
 import status
 
-ns = Namespace('auth', description='Authorizations')
+ns = Namespace('Auth', description='authorizations')
 
 
 @ns.route('/')
 class Auth(Resource):
-    @ns.doc(responses={
-            status.HTTP_200_OK: 'HTTP_200_OK',
-            status.HTTP_401_UNAUTHORIZED: 'HTTP_401_UNAUTHORIZED'
-            })
+    @ns.doc(security=[],
+            responses={
+                status.HTTP_200_OK: 'HTTP_200_OK',
+                status.HTTP_401_UNAUTHORIZED: 'HTTP_401_UNAUTHORIZED'
+    })
     def get(self):
         from flask import request
         ip = request.remote_addr
@@ -18,12 +19,12 @@ class Auth(Resource):
             has = Visitor.query.filter(Visitor.addr == ip).first()
             if not has:
                 from app import db
-                visitor = Visitor(addr=remote_addr)
+                visitor = Visitor(addr=ip)
                 db.session.add(visitor)
                 db.session.commit()
             from hashlib import md5
             h = md5()
             h.update(ip.encode(encoding='utf-8'))
-            return {'code': status.HTTP_200_OK, 'token': h.hexdigest()}
+            return {'code': status.HTTP_200_OK, 'X-API-KEY': h.hexdigest()}
         else:
             return {'code': status.HTTP_401_UNAUTHORIZED}
