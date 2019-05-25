@@ -4,7 +4,7 @@ from flask_restplus import Namespace, Resource, fields, reqparse
 from datetime import datetime
 import status
 
-ns = Namespace('Bing', description='the APIs of Bing Wallpapers')
+ns = Namespace('bing', description='The APIs of Bing Wallpapers')
 
 # models
 

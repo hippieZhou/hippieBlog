@@ -1,7 +1,7 @@
 from flask_restplus import Namespace, Resource
 import status
 
-ns = Namespace('Auth', description='authorizations')
+ns = Namespace('auth', description='Authorizations')
 
 
 @ns.route('/')
