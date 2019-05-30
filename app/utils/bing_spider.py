@@ -76,14 +76,14 @@ def restore_bing_wallpapers():
         for item in bings:
             try:
                 startdate = datetime.strptime(
-                    item['fullstartdate'], '%Y%m%d%H%M%S')
-                url = 'https://cn.bing.com' + item['url']
-                urlbase = 'https://cn.bing.com' + item['urlbase']
-                copyright = item['copyright']
-                title = item['title']
-                caption = item['caption']
-                desc = item['desc']
-                hsh = item['hsh']
+                    item.get('fullstartdate', datetime.utcnow()), '%Y%m%d%H%M%S')
+                url = 'https://cn.bing.com' + item.get('url', None)
+                urlbase = 'https://cn.bing.com' + item.get('urlbase', None)
+                copyright = item.get('copyright', None)
+                title = item.get('title', None)
+                caption = item.get('caption', None)
+                desc = item.get('desc', None)
+                hsh = item.get('hsh', None)
 
                 model = Bing(hsh=hsh, pub_date=startdate, url=url,
                              urlbase=urlbase, copyright=copyright,
