@@ -27,6 +27,6 @@ def detail(hsh):
     first = cache.get(hsh)
     if first is None:
         from app.models import Bing
-        first = Bing.query.filter_by(hsh=hsh).first_or_404()
+        first = Bing.query.filter_by(hsh=hsh).first()
         cache.set(str(hsh), first, timeout=5*60)
     return render_template('bing/detail.html', first=first, title='Bing')

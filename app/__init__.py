@@ -1,7 +1,4 @@
-import logging.config
-
-import click
-from flask import Flask, render_template
+from flask import Flask,render_template
 from werkzeug.contrib.cache import SimpleCache
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -11,19 +8,20 @@ from config import Config
 import status
 import os
 
-logging_conf_path = os.path.normpath(os.path.join(
-    os.path.dirname(__file__), '../logging.conf'))
-logging.config.fileConfig(logging_conf_path)
-log = logging.getLogger(__name__)
+
+from app.logger import Logger
+log = Logger('all.log', level='debug')
+
 
 cache = SimpleCache()
 db = SQLAlchemy()
 migrate = Migrate()
 api = Api()
 
+
 login_manager = LoginManager()
 login_manager.login_view = 'login'
-login_manager.login_message = 'Access denied.'
+login_manager.login_message = 'access denied.'
 login_manager.login_message_category = 'info'
 
 
@@ -50,7 +48,7 @@ def create_app():
     from app.commands import init_admin_command
     app.cli.add_command(init_admin_command)
 
-    log.info('>>>>> Starting development server <<<<<')
+    log.logger.info('>>>>> Starting development server <<<<<')
 
     return app
 

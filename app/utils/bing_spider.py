@@ -90,9 +90,9 @@ def restore_bing_wallpapers():
                              title=title, caption=caption, description=desc)
                 has = Bing.query.filter_by(pub_date=model.pub_date).first()
                 if has is None:
-                    log.info(model.pub_date)
+                    log.logger.debug(model.pub_date)
                     db.session.add(model)
             except Exception as e:
-                log.error(e)
+                log.logger.critical(e)
                 continue
         db.session.commit()

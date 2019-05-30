@@ -1,25 +1,27 @@
 {% extends 'base.html' %} {% block content %}
 
 <div class="container wow fadeIn">
+{% if first %}
     <div class="row pt-4">
-        <div class="jumbotron text-center">
-            <h4 class="card-title font-bold pb-2"><strong>{{ first.pub_date.strftime('%Y-%m-%d') }}</strong></h4>
-            <div class="view overlay my-4">
-                <img id="img" src="{{ first.url }}" class="img-fluid" alt="">
-                <a>
-                    <div class="mask rgba-white-slight"></div>
+            <div class="jumbotron text-center">
+                <h4 class="card-title font-bold pb-2"><strong>{{ first.pub_date.strftime('%Y-%m-%d') }}</strong></h4>
+                <div class="view overlay my-4">
+                    <img id="img" src="{{ first.url }}" class="img-fluid" alt="">
+                    <a>
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+                <h5 class="indigo-text font-bold mb-4">Photography</h5>
+                <figcaption class="figure-caption text-center mb-4">@{{ first.copyright }}</figcaption>
+                <p class="card-text text-left">
+                    @{{ first.description }}
+                </p>
+                <a class="btn btn-outline-info btn-rounded waves-effect" onclick="download_image(this);">
+                    <i class="fa fa-download pr-2" aria-hidden="true"></i> Download
                 </a>
             </div>
-            <h5 class="indigo-text font-bold mb-4">Photography</h5>
-            <figcaption class="figure-caption text-center mb-4">@{{ first.copyright }}</figcaption>
-            <p class="card-text text-left">
-                @{{ first.description }}
-            </p>
-            <a class="btn btn-outline-info btn-rounded waves-effect" onclick="download_image(this);">
-                <i class="fa fa-download pr-2" aria-hidden="true"></i> Download
-            </a>
-        </div>
     </div>
+{% endif %}
 </div>
 
 {% endblock %} {% block scripts %}

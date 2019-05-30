@@ -1,5 +1,6 @@
 from flask import (render_template, make_response, send_from_directory)
 from app.main import bp
+from app import log, db
 
 
 @bp.route('/')
@@ -10,15 +11,17 @@ def index():
     route = request.access_route + [request.remote_addr]
     remote_addr = next((addr for addr in reversed(route)
                         if addr not in trusted_proxies), request.remote_addr)
-    # print(remote_addr)
     from app.models import Visitor
     has = Visitor.query.filter(Visitor.addr == remote_addr).first()
     if not has:
-        from app import db
-        visitor = Visitor(addr=remote_addr)
-        db.session.add(visitor)
-        db.session.commit()
-
+        try:
+            visitor = Visitor(addr=remote_addr)
+            db.session.add(visitor)
+        except Exception as e:
+            log.logger.critical(e)
+            db.session.rollback()
+        finally:
+            db.session.commit()
     return render_template('main/index.html')
 
 
