@@ -1,6 +1,6 @@
 from flask import render_template, request
 from datetime import date
-
+from app import cache
 from app.bing import bp
 
 
@@ -24,6 +24,9 @@ def index():
 
 @bp.route('/detail/<hsh>', methods=['GET', 'POST'])
 def detail(hsh):
-    from app.models import Bing
-    first = Bing.query.filter_by(hsh=hsh).first_or_404()
+    first = cache.get(hsh)
+    if first is None:
+        from app.models import Bing
+        first = Bing.query.filter_by(hsh=hsh).first_or_404()
+        cache.set(str(hsh), first, timeout=5*60)
     return render_template('bing/detail.html', first=first, title='Bing')

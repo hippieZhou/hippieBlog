@@ -2,6 +2,7 @@ import logging.config
 
 import click
 from flask import Flask, render_template
+from werkzeug.contrib.cache import SimpleCache
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
@@ -15,6 +16,7 @@ logging_conf_path = os.path.normpath(os.path.join(
 logging.config.fileConfig(logging_conf_path)
 log = logging.getLogger(__name__)
 
+cache = SimpleCache()
 db = SQLAlchemy()
 migrate = Migrate()
 api = Api()
