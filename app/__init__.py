@@ -1,13 +1,10 @@
-from flask import Flask,render_template
+from flask import Flask
 from werkzeug.contrib.cache import SimpleCache
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_restplus import Api
 from config import Config
-import status
-import os
-
 
 from app.logger import Logger
 log = Logger('all.log', level='debug')
@@ -45,36 +42,9 @@ def create_app():
     migrate.init_app(app, db, render_as_batch=True)
     login_manager.init_app(app)
 
-    from app.commands import init_admin_command
+    from app.cmds import init_admin_command
     app.cli.add_command(init_admin_command)
 
     log.logger.info('>>>>> Starting development server <<<<<')
 
     return app
-
-
-app = create_app()
-
-
-@app.context_processor
-def inject_user():
-    from flask_login import current_user
-    user = current_user
-    from datetime import datetime
-    year = datetime.now().year
-    return dict(user=user, year=year)
-
-
-@app.errorhandler(400)
-def bad_request(e):
-    return render_template('error.html', code=status.HTTP_400_BAD_REQUEST), 400
-
-
-@app.errorhandler(404)
-def page_not_found(e):
-    return render_template('error.html', code=status.HTTP_404_NOT_FOUND), 404
-
-
-@app.errorhandler(500)
-def internale_server_error(e):
-    return render_template('error.html', code=status.HTTP_500_INTERNAL_SERVER_ERROR), 500
