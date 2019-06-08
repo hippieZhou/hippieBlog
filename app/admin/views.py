@@ -54,8 +54,7 @@ def login():
     return render_template('/admin/login.html', title='Login', form=form)
 
 
-@bp.route('/logout', methods=['GET', 'POST'])
-@login_required
+@bp.route('/logout')
 def logout():
     logout_user()
     flash('Logout successfully', category='success')
