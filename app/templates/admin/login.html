@@ -3,8 +3,7 @@
 {% block content %}
 <div class="container text-center" style="height:100vh;">
 
-    <form action="" method="POST" class="border border-light py-5 px-4 my-5"
-        style="display: inline-block;margin-bottom: auto;vertical-align: middle;">
+    <form action="" method="POST" class="text-center border border-light p-5">
 
         {{ form.csrf_token }}
 
@@ -29,7 +28,6 @@
             {% endif %}
         </div>
     </form>
-
 
 </div>
 {% endblock %}

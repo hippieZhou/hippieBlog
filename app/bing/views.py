@@ -9,11 +9,10 @@ def index():
     from app.models import Bing
     bings = Bing.query.order_by(Bing.pub_date.desc())
 
-    first_time = bings.first().pub_date.date()
-    today = date.today()
-    if(first_time < today):
+    first = bings.first()
+    if first is None or first.pub_date.date() < date.today():
         from app.utils import bing_spider
-        bing_spider.restore_bing_wallpapers()
+        bing_spider.spider()
 
     bings = Bing.query.order_by(Bing.pub_date.desc())
     page = request.args.get('page', 1, type=int)

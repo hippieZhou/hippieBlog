@@ -25,8 +25,8 @@ api = Api(bp,
 
 
 
-from .auth import ns as auth_namespace
+from app.api.v1.auth import ns as auth_namespace
 api.add_namespace(auth_namespace)
 
-from .bing import ns as bing_namespace
+from app.api.v1.bing import ns as bing_namespace
 api.add_namespace(bing_namespace)
