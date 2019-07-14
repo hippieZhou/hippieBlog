@@ -73,7 +73,7 @@ def spider():
                 model = Bing(hsh=hsh, pub_date=startdate, url=url,
                              urlbase=urlbase, copyright=copyright,
                              title=title, caption=caption, description=desc)
-                has = Bing.query.filter_by(pub_date=model.pub_date).first()
+                has = Bing.query.filter_by(pub_date=model.pub_date)
                 if has is None:
                     log.logger.debug(model.pub_date)
                     db.session.add(model)
