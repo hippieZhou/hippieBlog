@@ -20,15 +20,15 @@ class Bing(db.Model):
     def __repr__(self):
         return "<Bing:%r>" % self.id
 
-    def get_json(self):
-        return dict(
-            hsh=self.hsh,
-            pub_date=self.pub_date.strftime("%Y%m%d"),
-            url=self.url,
-            title=self.title,
-            caption=self.caption,
-            description=self.description
-        )
+    def to_dict(self):
+        data = {
+            'hsh': self.hsh,
+            'pub_date': self.pub_date.strftime("%Y%m%d"),
+            'url': self.url,
+            'title': self.title,
+            'caption': self.caption,
+            'description': self.description
+        }
 
 
 class User(db.Model, UserMixin):
